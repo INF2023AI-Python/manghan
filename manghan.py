@@ -12,28 +12,28 @@ words = [
 pick = words[random.randint(0,len(words))-1].lower()
 guess = ""
 correct = []
-usedLetters = []
+wrongLetters = []
 
-while len(usedLetters) < 5:
+while len(wrongLetters) < 5:
     guess = str(input("guess your letter:")).lower()
-    if guess in pick:
+    if guess in pick and guess not in correct:
         correct.append(guess)
-    else:
-        usedLetters.append(guess)
+    elif guess not in pick and guess not in wrongLetters:
+        wrongLetters.append(guess)
     
-    for i,e in enumerate(pick):
+    temp = ""
+    for e in pick:
         if e in correct:
+            temp = temp +e
             print(e,end="")
         else:
             print("_",end="")
-    print("\t",usedLetters)
-    temp = ""
-    for e in correct:
-        temp = temp + e
+    print("\t",wrongLetters)
+   
     print(temp, pick)
     if temp == pick:
         print("Gewonnen")
         break
     
-if len(usedLetters) >= 5:
+if len(wrongLetters) >= 5:
     print("verloren",pick)
