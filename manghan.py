@@ -26,6 +26,11 @@ wrongLetters = []
 while len(wrongLetters) < 5:
     guess = str(input("guess your letter:")).lower()
     if len(guess) > 1:
+        print("Geb nur einen Buchstaben ein du DULLI")
+        for i in range (10):
+            GPIO.output(red, False)
+            time.sleep(.3)
+            GPIO.output(red, True)
         continue
     if guess in pick and guess not in correct:
         correct.append(guess)
