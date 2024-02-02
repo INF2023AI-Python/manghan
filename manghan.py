@@ -25,6 +25,8 @@ wrongLetters = []
 
 while len(wrongLetters) < 5:
     guess = str(input("guess your letter:")).lower()
+    if len(guess) > 1:
+        break
     if guess in pick and guess not in correct:
         correct.append(guess)
         GPIO.output(green, False)
