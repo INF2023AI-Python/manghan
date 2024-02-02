@@ -2,14 +2,12 @@ import random
 import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode (GPIO.BCM)
-GPIO.setup (2, GPIO.OUT)
+red = 2
+green = 3
 
-while True:
-    GPIO.output(2, True)
-    time.sleep(1)
-    GPIO.output(2, False)
-    time.sleep(1)
+GPIO.setmode (GPIO.BCM)
+GPIO.setup (red, GPIO.OUT)
+GPIO.setup (green, GPIO.OUT)
 
 words = [
     "Apfel", "Banane", "Kirsche", "Orange", "Erdbeere",
@@ -29,9 +27,14 @@ while len(wrongLetters) < 5:
     guess = str(input("guess your letter:")).lower()
     if guess in pick and guess not in correct:
         correct.append(guess)
+        GPIO.output(green, False)
+        time.sleep(1)
+        GPIO.output(green, True)
     elif guess not in pick and guess not in wrongLetters:
         wrongLetters.append(guess)
-    
+        GPIO.output(red, False)
+        time.sleep(1)
+        GPIO.output(red, True)
     temp = ""
     for e in pick:
         if e in correct:
